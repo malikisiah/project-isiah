@@ -195,30 +195,33 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              I remember writing my first <q>Hello World</q> program in Java
+              back in college. I had almost no programming experience until that
+              point and now, years later, here I am. Having realized so much
+              about computers and programming, yet feeling that I have only
+              scratched the surface of the entire eco-system that surrounds
+              developing and maintaining software.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              College was a surreal experience. I enjoyed getting to network and
+              connect with so many unique individuals with talents spanning the
+              spectrum! My nose was buried in textbooks that covered topics
+              ranging from algorithmic time complexity to finite automata, and
+              it is thanks to my foundation in Computer Science that has enabled
+              me to excel as an engineer.
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              After graduation, I decided to pack my bags and return to my
+              hometown of Chicago. It had always been a dream of mine to live
+              and work in the Windy City. I enjoy the vibrant culture,
+              world-class ethnic restaurants, lively music scene, and especially
+              its historic architecture.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              Today, I&apos;m the sole Software Developer of Biblish, a startup
+              where we&apos;re working on building a home for literature in the
+              21st century. We&apos;re enabling writers, publishers, and actors
+              a place to connect and take their talents to the next level.
             </p>
           </div>
         </div>
@@ -247,7 +250,7 @@ export default function About() {
                 icon={MailIcon}
                 className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
               >
-                malikisiah214@gmail.com
+                malik@malikisiah.dev
               </SocialLink>
             </ul>{' '}
           </div>
