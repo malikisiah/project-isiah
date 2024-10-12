@@ -15,8 +15,8 @@ export default function ImageSwapper() {
     { image: image1, rotation: 'rotate-2' },
     { image: image4, rotation: '-rotate-2' },
     { image: image3, rotation: 'rotate-2' },
-    { image: image5, rotation: 'rotate-2' },
-    { image: image2, rotation: '-rotate-2' },
+    { image: image5, rotation: '-rotate-2' },
+    { image: image2, rotation: 'rotate-2' },
   ]
 
   const [currentIdx, setCurrentIdx] = useState(0)

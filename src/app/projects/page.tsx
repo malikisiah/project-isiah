@@ -7,35 +7,42 @@ import logo from '@/images/logos/logo.png'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'Inaction',
     description:
       'Creating technology to empower civilians to explore space on their own terms.',
     link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
     logo: logo,
   },
   {
-    name: 'Animaginary',
+    name: 'Unreal Demo',
     description:
       'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
+    link: { href: '#', label: 'watch video' },
     logo: logo,
   },
   {
-    name: 'HelioStream',
+    name: 'Submissions',
     description:
       'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
+    link: { href: '#', label: 'submissions.biblish.com' },
     logo: logo,
   },
   {
-    name: 'cosmOS',
+    name: 'Biblish Library',
     description:
       'The operating system that powers our Planetaria space shuttles.',
+    link: { href: '#', label: 'library.biblish.com' },
+    logo: logo,
+  },
+  {
+    name: 'AI Model',
+    description:
+      'The schematics for the first rocket I designed that successfully made it to orbit.',
     link: { href: '#', label: 'github.com' },
     logo: logo,
   },
   {
-    name: 'OpenShuttle',
+    name: 'Something for the Black Sheep',
     description:
       'The schematics for the first rocket I designed that successfully made it to orbit.',
     link: { href: '#', label: 'github.com' },

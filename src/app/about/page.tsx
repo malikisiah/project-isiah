@@ -1,16 +1,17 @@
-import { type Metadata } from 'next'
-import Link from 'next/link'
-import clsx from 'clsx'
+import { type Metadata } from 'next';
+import Link from 'next/link';
+import clsx from 'clsx';
+import { supabase } from '@/database';
 
-import logoBiblish from '@/images/logos/logo.png'
-import logoBlackSheep from '@/images/logos/bscirclewhite.png'
-import logoASU from '@/images/logos/ASU-logo.png'
+import logoBiblish from '@/images/logos/logo.png';
+import logoBlackSheep from '@/images/logos/bscirclewhite.png';
+import logoASU from '@/images/logos/ASU-logo.png';
 
-import { Container } from '@/components/Container'
-import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons'
-import ImageSwapper from '@/components/ImageSwapper'
-import Image, { type ImageProps } from 'next/image'
-import { Button } from '@/components/Button'
+import { Container } from '@/components/Container';
+import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons';
+import ImageSwapper from '@/components/ImageSwapper';
+import Image, { type ImageProps } from 'next/image';
+import { Button } from '@/components/Button';
 
 function SocialLink({
   className,
@@ -18,10 +19,10 @@ function SocialLink({
   children,
   icon: Icon,
 }: {
-  className?: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-  children: React.ReactNode
+  className?: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
 }) {
   return (
     <li className={clsx(className, 'flex')}>
@@ -33,7 +34,7 @@ function SocialLink({
         <span className="ml-4">{children}</span>
       </Link>
     </li>
-  )
+  );
 }
 
 function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -44,25 +45,25 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         d="M6 5a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H6Zm.245 2.187a.75.75 0 0 0-.99 1.126l6.25 5.5a.75.75 0 0 0 .99 0l6.25-5.5a.75.75 0 0 0-.99-1.126L12 12.251 6.245 7.187Z"
       />
     </svg>
-  )
+  );
 }
 
 interface Role {
-  company: string
-  title: string
-  logo: ImageProps['src']
-  start: string | { label: string; dateTime: string }
-  end: string | { label: string; dateTime: string }
+  company: string;
+  title: string;
+  logo: ImageProps['src'];
+  start: string | { label: string; dateTime: string };
+  end: string | { label: string; dateTime: string };
 }
 
 function Role({ role }: { role: Role }) {
   let startLabel =
-    typeof role.start === 'string' ? role.start : role.start.label
+    typeof role.start === 'string' ? role.start : role.start.label;
   let startDate =
-    typeof role.start === 'string' ? role.start : role.start.dateTime
+    typeof role.start === 'string' ? role.start : role.start.dateTime;
 
-  let endLabel = typeof role.end === 'string' ? role.end : role.end.label
-  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime
+  let endLabel = typeof role.end === 'string' ? role.end : role.end.label;
+  let endDate = typeof role.end === 'string' ? role.end : role.end.dateTime;
 
   return (
     <li className="flex gap-4">
@@ -89,7 +90,7 @@ function Role({ role }: { role: Role }) {
         </dd>
       </dl>
     </li>
-  )
+  );
 }
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -111,7 +112,7 @@ function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         className="stroke-zinc-400 dark:stroke-zinc-500"
       />
     </svg>
-  )
+  );
 }
 
 function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -124,7 +125,7 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function Resume() {
@@ -153,7 +154,7 @@ function Resume() {
       start: 'September 2022',
       end: 'May 2023',
     },
-  ]
+  ];
 
   return (
     <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
@@ -171,16 +172,18 @@ function Resume() {
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
-  )
+  );
 }
 
 export const metadata: Metadata = {
   title: 'About',
   description:
     'I’m Malik Teague. I live in Chicago, where I turn ideas into reality.',
-}
+};
 
-export default function About() {
+export default async function About() {
+  const { data: blogPosts } = await supabase.from('blog_posts').select('*');
+  console.log(blogPosts);
   return (
     <Container className="mt-16 sm:mt-32">
       <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
@@ -257,5 +260,5 @@ export default function About() {
         </div>
       </div>
     </Container>
-  )
+  );
 }
