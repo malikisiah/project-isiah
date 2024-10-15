@@ -45,7 +45,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ArticlesIndex() {
-  const { data: articles } = await supabase.from('blog_posts').select('*');
+  const { data: articles } = await supabase
+    .from('blog_posts')
+    .select('*')
+    .order('date', { ascending: false });
 
   return (
     <SimpleLayout
