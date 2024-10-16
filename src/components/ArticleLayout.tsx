@@ -7,7 +7,8 @@ import { AppContext } from '@/app/providers';
 import { Container } from '@/components/Container';
 import { Prose } from '@/components/Prose';
 import { formatDate } from '@/lib/formatDate';
-import { Database } from '@/database/database.types';
+
+import { Article } from '@/database/types';
 
 function ArrowLeftIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -26,7 +27,7 @@ export function ArticleLayout({
   article,
   children,
 }: {
-  article: Database['public']['Tables']['blog_posts']['Row'];
+  article: Article;
   children: React.ReactNode;
 }) {
   let router = useRouter();

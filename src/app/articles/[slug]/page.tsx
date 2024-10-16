@@ -1,6 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { supabase } from '@/database';
-
 import { ArticleLayout } from '@/components/ArticleLayout';
 
 export default async function Page({ params }: { params: { slug: string } }) {
