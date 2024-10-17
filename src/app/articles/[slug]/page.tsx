@@ -4,7 +4,7 @@ import { ArticleLayout } from '@/components/ArticleLayout';
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { data: article } = await supabase
-    .from('blog_posts')
+    .from('articles')
     .select('*')
     .eq('slug', params.slug)
     .single();
