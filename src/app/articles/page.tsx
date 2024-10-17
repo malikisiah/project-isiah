@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     'All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order.',
 };
 
+export const revalidate = 0;
 export default async function ArticlesIndex() {
   const { data: articles } = await supabase
     .from('articles')
