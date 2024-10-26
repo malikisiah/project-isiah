@@ -5,34 +5,58 @@ import { Card } from '@/components/Card';
 import { SimpleLayout } from '@/components/SimpleLayout';
 import biblishLogo from '@/images/logos/logo.png';
 import expoLogo from '@/images/logos/banner.png';
+import nextLogo from '@/images/logos/next-js-icon-512x512-zuauazrk.png';
+import springLogo from '@/images/logos/springBoot.png';
+import tensorflowLogo from '@/images/logos/tensorflow-icon-955x1024-hd4xzbqj.png';
 
 const projects = [
   {
-    name: 'Biblish Library',
+    name: 'Biblish',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
+      'Creating technology to empower writers, publishers, and actors to make a literary impact in the 21st century.',
     link: {
-      href: 'https://inaction.biblish.com',
-      label: 'inaction.biblish.com',
+      href: 'https://biblish.com',
+      label: 'biblish.com',
     },
     logo: biblishLogo,
   },
   {
-    name: 'Mobile Blog App',
+    name: 'Personal Mobile App',
     description:
-      'React native application that I can use to make real time changes to my articles page!',
+      'Handy React Native application that is in sync with my database which allows me to make realtime changes to this very site!',
     link: {
       href: 'https://github.com/malikisiah/project-isiah-blogger',
       label: 'github.com',
     },
     logo: expoLogo,
   },
+
   {
-    name: 'Submissions',
+    name: 'Images REST API',
     description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'submissions.biblish.com' },
-    logo: biblishLogo,
+      'Shorter demo project covering Java Spring framework with dependency injection, HTTP requests, & AOP style code.',
+    link: { href: 'https://github.com/malikisiah/photos', label: 'github.com' },
+    logo: springLogo,
+  },
+  {
+    name: 'Special Affair',
+    description:
+      'Dance Studio business website. This holds a special place in my repo list as it was my first endeavor into full-stack development.',
+    link: {
+      href: 'https://special-affair.vercel.app',
+      label: 'special-affair.vercel.app',
+    },
+    logo: nextLogo,
+  },
+  {
+    name: 'AI & Machine Learning',
+    description:
+      'Creating my own models with Tensorflow. This repo contains mostly learning excersises but I will have AI/ML applications soon!',
+    link: {
+      href: 'https://github.com/malikisiah/AI',
+      label: 'github.com',
+    },
+    logo: tensorflowLogo,
   },
 ];
 
@@ -49,14 +73,14 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Things I’ve made trying to put my dent in the universe.',
+  description: "Some cool stuff that I've created",
 };
 
 export default function Projects() {
   return (
     <SimpleLayout
-      title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      title="A Few Projects I've Brought to Life"
+      intro="Across years of work and experimentation, I've built a range of projects—some live and serving real users, others personal prototypes created for learning or enjoyment. These are the ones I’m most proud of. Take a look."
     >
       <ul
         role="list"
