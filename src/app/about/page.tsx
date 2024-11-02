@@ -4,7 +4,8 @@ import clsx from 'clsx';
 
 import logoBiblish from '@/images/logos/logo.png';
 import logoBlackSheep from '@/images/logos/bscirclewhite.png';
-import logoASU from '@/images/logos/ASU-logo.png';
+
+import logoInternational from '@/images/logos/international-2.svg';
 
 import { Container } from '@/components/Container';
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons';
@@ -130,14 +131,21 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function Resume() {
   let resume: Array<Role> = [
     {
-      company: 'Biblish',
-      title: 'Software Developer',
-      logo: logoBiblish,
-      start: 'April 2024',
+      company: 'International',
+      title: 'Software Engineer',
+      logo: logoInternational,
+      start: 'November 2024',
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear().toString(),
       },
+    },
+    {
+      company: 'Biblish',
+      title: 'Software Developer',
+      logo: logoBiblish,
+      start: 'April 2024',
+      end: 'October 2024',
     },
     {
       company: 'The Black Sheep',
@@ -145,13 +153,6 @@ function Resume() {
       logo: logoBlackSheep,
       start: 'August 2023',
       end: 'April 2024',
-    },
-    {
-      company: 'Arizona State University',
-      title: 'Teaching Assistant/Tutor',
-      logo: logoASU,
-      start: 'September 2022',
-      end: 'May 2023',
     },
   ];
 
@@ -166,7 +167,12 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button variant="secondary" className="group mt-6 w-full">
+      <Button
+        href={'Malik_Teague_Resume.pdf'}
+        target="#"
+        variant="secondary"
+        className="group mt-6 w-full"
+      >
         Download
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
