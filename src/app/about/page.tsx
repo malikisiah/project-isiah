@@ -1,7 +1,6 @@
 import { type Metadata } from 'next';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { supabase } from '@/database';
 
 import logoBiblish from '@/images/logos/logo.png';
 import logoBlackSheep from '@/images/logos/bscirclewhite.png';
