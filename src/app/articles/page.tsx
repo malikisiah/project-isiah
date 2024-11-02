@@ -2,10 +2,9 @@ import { type Metadata } from 'next';
 import { Card } from '@/components/Card';
 import { SimpleLayout } from '@/components/SimpleLayout';
 import { formatDate } from '@/lib/formatDate';
-import { supabase } from '@/database';
-import { Article } from '@/database/types';
+import { type ArticleWithSlug, getAllArticles } from '@/lib/articles';
 
-function ArticleCard({ article }: { article: Article }) {
+function ArticleCard({ article }: { article: ArticleWithSlug }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
@@ -42,10 +41,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 0;
 export default async function ArticlesIndex() {
-  const { data: articles } = await supabase
-    .from('articles')
-    .select('*')
-    .order('date', { ascending: false });
+  const articles = await getAllArticles();
 
   return (
     <SimpleLayout
