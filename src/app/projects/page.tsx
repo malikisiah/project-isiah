@@ -4,10 +4,9 @@ import Image from 'next/image';
 import { Card } from '@/components/Card';
 import { SimpleLayout } from '@/components/SimpleLayout';
 import biblishLogo from '@/images/logos/logo.png';
-import expoLogo from '@/images/logos/banner.png';
+
 import nextLogo from '@/images/logos/next-js-icon-512x512-zuauazrk.png';
-import springLogo from '@/images/logos/springBoot.png';
-import tensorflowLogo from '@/images/logos/tensorflow-icon-955x1024-hd4xzbqj.png';
+import unrealLogo from '@/images/logos/unreal-icon-2048x2048-6f2xqdhr.png';
 
 const projects = [
   {
@@ -20,24 +19,7 @@ const projects = [
     },
     logo: biblishLogo,
   },
-  {
-    name: 'Personal Mobile App',
-    description:
-      'Handy React Native application that is in sync with my database which allows me to make realtime changes to this very site!',
-    link: {
-      href: 'https://github.com/malikisiah/project-isiah-blogger',
-      label: 'github.com',
-    },
-    logo: expoLogo,
-  },
 
-  {
-    name: 'Images REST API',
-    description:
-      'Shorter demo project covering Java Spring framework with dependency injection, HTTP requests, & AOP style code.',
-    link: { href: 'https://github.com/malikisiah/photos', label: 'github.com' },
-    logo: springLogo,
-  },
   {
     name: 'Special Affair',
     description:
@@ -49,14 +31,14 @@ const projects = [
     logo: nextLogo,
   },
   {
-    name: 'AI & Machine Learning',
+    name: 'Unreal Engine Demo',
     description:
-      'Creating my own models with Tensorflow. This repo contains mostly learning excersises but I will have AI/ML applications soon!',
+      'A short demo game made with unreal engine that is currently in development. Demo is coming soon! 🙌',
     link: {
-      href: 'https://github.com/malikisiah/AI',
-      label: 'github.com',
+      href: '#',
+      label: 'Coming Soon',
     },
-    logo: tensorflowLogo,
+    logo: unrealLogo,
   },
 ];
 
