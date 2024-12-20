@@ -1,21 +1,21 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useTheme } from 'next-themes'
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useTheme } from 'next-themes';
 import {
   Popover,
   PopoverButton,
   PopoverBackdrop,
   PopoverPanel,
   Switch,
-} from '@headlessui/react'
-import clsx from 'clsx'
+} from '@headlessui/react';
+import clsx from 'clsx';
 
-import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import { Container } from '@/components/Container';
+import avatarImage from '@/images/avatar.jpg';
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -29,7 +29,7 @@ function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function ChevronDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -43,7 +43,7 @@ function ChevronDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function SunIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -62,7 +62,7 @@ function SunIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         fill="none"
       />
     </svg>
-  )
+  );
 }
 
 function MoonIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -75,15 +75,15 @@ function MoonIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
         strokeLinejoin="round"
       />
     </svg>
-  )
+  );
 }
 
 function MobileNavItem({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
   return (
     <li>
@@ -91,7 +91,7 @@ function MobileNavItem({
         {children}
       </PopoverButton>
     </li>
-  )
+  );
 }
 
 function MobileNavigation(
@@ -129,17 +129,17 @@ function MobileNavigation(
         </nav>
       </PopoverPanel>
     </Popover>
-  )
+  );
 }
 
 function NavItem({
   href,
   children,
 }: {
-  href: string
-  children: React.ReactNode
+  href: string;
+  children: React.ReactNode;
 }) {
-  let isActive = usePathname() === href
+  let isActive = usePathname() === href;
 
   return (
     <li>
@@ -158,7 +158,7 @@ function NavItem({
         )}
       </Link>
     </li>
-  )
+  );
 }
 
 function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
@@ -170,17 +170,17 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
         <NavItem href="/articles">Articles</NavItem>
       </ul>
     </nav>
-  )
+  );
 }
 
 function ThemeToggle() {
-  let { resolvedTheme, setTheme } = useTheme()
-  let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
+  let { resolvedTheme, setTheme } = useTheme();
+  let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
+  let [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -205,13 +205,13 @@ function ThemeToggle() {
         />
       </Switch>
     </>
-  )
+  );
 }
 
 function clamp(number: number, a: number, b: number) {
-  let min = Math.min(a, b)
-  let max = Math.max(a, b)
-  return Math.min(Math.max(number, min), max)
+  let min = Math.min(a, b);
+  let max = Math.max(a, b);
+  return Math.min(Math.max(number, min), max);
 }
 
 function AvatarContainer({
@@ -226,7 +226,7 @@ function AvatarContainer({
       )}
       {...props}
     />
-  )
+  );
 }
 
 function Avatar({
@@ -234,7 +234,7 @@ function Avatar({
   className,
   ...props
 }: Omit<React.ComponentPropsWithoutRef<typeof Link>, 'href'> & {
-  large?: boolean
+  large?: boolean;
 }) {
   return (
     <Link
@@ -255,7 +255,7 @@ function Avatar({
         priority
       />
     </Link>
-  )
+  );
 }
 
 export function Header() {
@@ -310,7 +310,7 @@ export function Header() {
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto">
-                  <ThemeToggle />
+                  {/* <ThemeToggle /> */}
                 </div>
               </div>
             </div>
@@ -318,5 +318,5 @@ export function Header() {
         </div>
       </header>
     </>
-  )
+  );
 }
