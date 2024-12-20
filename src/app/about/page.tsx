@@ -224,10 +224,10 @@ export default async function About() {
               its historic architecture.
             </p>
             <p>
-              Today, I&apos;m the sole Software Developer of Biblish, a startup
-              where we&apos;re working on building a home for literature in the
-              21st century. We&apos;re enabling writers, publishers, and actors
-              a place to connect and take their talents to the next level.
+              Today, I&apos;m a Software Engineer at International Motors, where
+              I contribute to advancing sustainable mobility solutions, that
+              align with their vision to accelerate the impact of sustainable
+              mobility.
             </p>
           </div>
         </div>
