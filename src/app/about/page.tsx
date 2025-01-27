@@ -130,16 +130,16 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 function Resume() {
   let resume: Array<Role> = [
-    {
-      company: 'International',
-      title: 'Software Engineer',
-      logo: logoInternational,
-      start: 'November 2024',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
-    },
+    // {
+    //   company: 'International',
+    //   title: 'Software Engineer',
+    //   logo: logoInternational,
+    //   start: 'November 2024',
+    //   end: {
+    //     label: 'Present',
+    //     dateTime: new Date().getFullYear().toString(),
+    //   },
+    // },
     {
       company: 'Biblish',
       title: 'Software Developer',
