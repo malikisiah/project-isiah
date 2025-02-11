@@ -1,0 +1,294 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Malik',
+  date: '2025-02-11',
+  title: 'tRPC with React Native (Expo app)',
+  description:
+    'How to initialize tRPC in an Expo app using Expo API routes',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+## Install Dependencies
+
+Install the required packages
+
+```jsx
+npm install @trpc/server@next @trpc/client@next @trpc/react-query@next @tanstack/react-query@latest
+```
+
+## Create Router Instance
+
+Create a file to initialize tRPC, set up context, and define the basic building blocks for your API
+
+```jsx
+// server/api/trpc.ts
+
+/**
+ * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
+ * 1. You want to modify request context (see Part 1).
+ * 2. You want to create a new middleware or type of procedure (see Part 3).
+ *
+ * TL;DR - This is where all the tRPC server stuff is created and plugged in. The pieces you will
+ * need to use are documented accordingly near the end.
+ */
+import { initTRPC } from "@trpc/server";
+import superjson from "superjson";
+import { ZodError } from "zod";
+
+// import { db } from "@/database/db";
+const db = null;
+
+/**
+ * 1. CONTEXT
+ *
+ * This section defines the "contexts" that are available in the backend API.
+ *
+ * These allow you to access things when processing a request, like the database, the session, etc.
+ *
+ * This helper generates the "internals" for a tRPC context. The API handler and RSC clients each
+ * wrap this and provides the required context.
+ *
+ * @see https://trpc.io/docs/server/context
+ */
+export const createTRPCContext = async (opts: { headers: Headers }) => {
+  return {
+    db,
+    ...opts,
+  };
+};
+
+/**
+ * 2. INITIALIZATION
+ *
+ * This is where the tRPC API is initialized, connecting the context and transformer. We also parse
+ * ZodErrors so that you get typesafety on the frontend if your procedure fails due to validation
+ * errors on the backend.
+ */
+const t = initTRPC.context<typeof createTRPCContext>().create({
+  transformer: superjson,
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    };
+  },
+});
+
+/**
+ * 3. ROUTER & PROCEDURE (THE IMPORTANT BIT)
+ *
+ * These are the pieces you use to build your tRPC API. You should import these a lot in the
+ * "/src/server/api/routers" directory.
+ */
+
+/**
+ * This is how you create new routers and sub-routers in your tRPC API.
+ *
+ * @see https://trpc.io/docs/router
+ */
+export const createTRPCRouter = t.router;
+
+/**
+ * Public (unauthenticated) procedure
+ *
+ * This is the base piece you use to build new queries and mutations on your tRPC API. It does not
+ * guarantee that a user querying is authorized, but you can still access user session data if they
+ * are logged in.
+ */
+export const publicProcedure = t.procedure;
+
+```
+
+## Define a Router
+
+Define a basic router with a simple “hello” query that accepts a string input and returns a greeting
+
+```jsx
+// server/api/routers/router.ts
+
+import { createTRPCRouter, publicProcedure } from "../trpc";
+import { z } from "zod";
+
+export const myRouter = createTRPCRouter({
+  hello: publicProcedure
+    .input(z.object({ text: z.string() }))
+    .query(({ input }) => {
+      return `Hello ${input.text}`;
+    }),
+});
+
+```
+
+## Combine Routers
+
+Create a root router that combines all of your sub-routers
+
+```jsx
+// server/api/root.ts
+
+import { createTRPCRouter } from "./trpc";
+import { myRouter } from "./routers/router";
+/**
+ * This is the primary router for your server.
+ *
+ * All routers added in /api/routers should be manually added here.
+ */
+export const appRouter = createTRPCRouter({
+  api: myRouter,
+});
+
+// export type definition of API
+export type AppRouter = typeof appRouter;
+
+```
+
+## Create API route
+
+Set up the API to handle tRPC requests
+
+```jsx
+// app/api/trpc/[trpc]+api.ts
+
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+
+import { createTRPCContext } from "@/server/api/trpc";
+import { appRouter } from "@/server/api/root";
+
+/**
+ * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
+ * handling a HTTP request (e.g. when you make requests from Client Components).
+ */
+const createContext = async (req: Request) => {
+  return createTRPCContext({
+    headers: req.headers,
+  });
+};
+
+const handler = (req: Request) =>
+  fetchRequestHandler({
+    endpoint: "/api/trpc",
+    req,
+    router: appRouter,
+    createContext: () => createContext(req),
+    onError:
+      process.env.NODE_ENV === "development"
+        ? ({ path, error }) => {
+            console.error(
+              `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
+            );
+          }
+        : undefined,
+  });
+
+export { handler as GET, handler as POST };
+```
+
+## Setup tRPC Client
+
+### Create Shared Helpers
+
+Define a helper for the API URL and a transformer for data serialization
+
+```jsx
+// trpc/shared.ts
+
+import superjson from "superjson";
+
+export const transformer = superjson;
+
+function getBaseUrl() {
+  return process.env.EXPO_PUBLIC_API_URL as string;
+}
+
+export function getUrl() {
+  return getBaseUrl() + "/api/trpc";
+}
+
+```
+
+### Create tRPC React Hooks
+
+Create a file that sets up the tRPC React hooks and provides the necessarry providers to wrap your app
+
+```jsx
+// trpc/react.tsx
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { httpBatchLink } from "@trpc/client";
+import { createTRPCReact } from "@trpc/react-query";
+import { useState } from "react";
+
+import { type AppRouter } from "@/server/api/root";
+import { getUrl, transformer } from "./shared";
+
+export const trpc = createTRPCReact<AppRouter>();
+
+export function TRPCReactProvider(props: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient());
+
+  const [trpcClient] = useState(() =>
+    trpc.createClient({
+      links: [
+         loggerLink({
+           enabled: (op) =>
+             process.env.NODE_ENV === "development" ||
+             (op.direction === "down" && op.result instanceof Error),
+         }),
+        httpBatchLink({
+          transformer,
+          url: getUrl(),
+        }),
+      ],
+    })
+  );
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        {props.children}
+      </trpc.Provider>
+    </QueryClientProvider>
+  );
+}
+
+```
+
+### Add tRPC providers
+
+Wrap your app’s navigation or layout component with the `TRPCReactProvider` so that your components can use the tRPC hooks
+
+```jsx
+import { Stack } from "expo-router";
+import { TRPCReactProvider } from "@/trpc/react";
+import React from "react";
+
+export default function RootLayout() {
+  return (
+    <>
+      <TRPCReactProvider>
+        <Stack />
+      </TRPCReactProvider>
+    </>
+  );
+}
+
+```
+
+## Set Environment Variable
+
+Set the `EXPO_PUBLIC_API_URL` environment variable to networks **ip** address
+
+```makefile
+EXPO_PUBLIC_API_URL=http://<YOUR-IP-ADDRESS>:8081
+```
