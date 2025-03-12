@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import logoBiblish from '@/images/logos/logo.png';
 import logoBlackSheep from '@/images/logos/bscirclewhite.png';
 
-import logoInternational from '@/images/logos/international-2.svg';
+import logoTempus from '@/images/logos/TEM.D-761cd9b1.png';
 
 import { Container } from '@/components/Container';
 import { GitHubIcon, LinkedInIcon } from '@/components/SocialIcons';
@@ -130,16 +130,16 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 function Resume() {
   let resume: Array<Role> = [
-    // {
-    //   company: 'International',
-    //   title: 'Software Engineer',
-    //   logo: logoInternational,
-    //   start: 'November 2024',
-    //   end: {
-    //     label: 'Present',
-    //     dateTime: new Date().getFullYear().toString(),
-    //   },
-    // },
+    {
+      company: 'Tempus AI',
+      title: 'Software Engineer II',
+      logo: logoTempus,
+      start: 'March 2025',
+      end: {
+        label: 'Present',
+        dateTime: new Date().getFullYear().toString(),
+      },
+    },
     {
       company: 'Biblish',
       title: 'Software Developer',
@@ -224,10 +224,10 @@ export default async function About() {
               its historic architecture.
             </p>
             <p>
-              Today, I&apos;m a Software Engineer at International Motors, where
-              I contribute to advancing sustainable mobility solutions, that
-              align with their vision to accelerate the impact of sustainable
-              mobility.
+              Today, I&apos;m a Software Engineer at
+              <span className="font-semibold"> Tempus AI</span>, where I&apos;m
+              building innovative tech solutions oritned around clinical care
+              and research products-and the virtuous cycle between them.
             </p>
           </div>
         </div>
