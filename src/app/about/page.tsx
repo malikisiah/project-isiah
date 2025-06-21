@@ -141,18 +141,11 @@ function Resume() {
       },
     },
     {
-      company: 'Biblish',
-      title: 'Software Developer',
-      logo: logoBiblish,
-      start: 'April 2024',
-      end: 'October 2024',
-    },
-    {
       company: 'The Black Sheep',
       title: 'Software Developer',
       logo: logoBlackSheep,
       start: 'August 2023',
-      end: 'April 2024',
+      end: 'Feburary 2025',
     },
   ];
 
