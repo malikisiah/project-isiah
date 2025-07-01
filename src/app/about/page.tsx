@@ -145,7 +145,7 @@ function Resume() {
       title: 'Software Developer',
       logo: logoBlackSheep,
       start: 'August 2023',
-      end: 'Feburary 2025',
+      end: 'February 2025',
     },
   ];
 
